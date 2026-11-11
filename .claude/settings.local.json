@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "PowerShell(.\\\\.venv\\\\Scripts\\\\python.exe headlines.py; .\\\\.venv\\\\Scripts\\\\python.exe headlines.py \"Organic cold-brew coffee concentrate, makes 16 cups per bottle\")",
-      "PowerShell(.\\\\.venv\\\\Scripts\\\\python.exe -c \"import os;from dotenv import load_dotenv;load_dotenv\\(\\);from google import genai;c=genai.Client\\(api_key=os.environ['GEMINI_API_KEY']\\);print\\([m.name for m in c.models.list\\(\\) if 'flash' in m.name]\\)\")"
-    ]
-  }
-}

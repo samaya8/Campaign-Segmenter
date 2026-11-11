@@ -4,3 +4,4 @@ __pycache__/
 *.pyc
 # Raw dataset stays local until the data milestone
 *.csv
+.claude/settings.local.json
