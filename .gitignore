@@ -2,6 +2,11 @@
 .venv/
 __pycache__/
 *.pyc
-# Raw dataset stays local until the data milestone
+# Raw data stays local (see README for download steps)
 *.csv
+data/raw/
+*.sqlite
+*.db
+.pytest_cache/
+pytest-cache-files-*/
 .claude/settings.local.json
