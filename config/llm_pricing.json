@@ -1,0 +1,22 @@
+{
+  "_note": "USD per 1 million tokens, Gemini Developer API, paid tier, Standard, text. Output price INCLUDES thinking tokens. Edit this file when Google changes prices; costs in reports/llm_usage.csv are ESTIMATES based on it.",
+  "source": "https://ai.google.dev/gemini-api/docs/pricing",
+  "checked_on": "2026-11-13",
+  "currency": "USD",
+  "models": {
+    "gemini-3.8-flash": [
+      {"effective_from": null, "effective_to": "2026-12-31", "input_per_1m": 0.75, "output_per_1m": 3.75},
+      {"effective_from": "2027-01-01", "effective_to": null, "input_per_1m": 1.50, "output_per_1m": 7.50}
+    ],
+    "gemini-3.6-flash": [
+      {"effective_from": null, "effective_to": "2026-12-31", "input_per_1m": 0.75, "output_per_1m": 3.75},
+      {"effective_from": "2027-01-01", "effective_to": null, "input_per_1m": 1.50, "output_per_1m": 7.50}
+    ],
+    "gemini-3.5-flash-lite": [
+      {"effective_from": null, "effective_to": null, "input_per_1m": 0.30, "output_per_1m": 2.50}
+    ],
+    "gemini-2.5-flash-lite": [
+      {"effective_from": null, "effective_to": null, "input_per_1m": 0.10, "output_per_1m": 0.40}
+    ]
+  }
+}

@@ -7,7 +7,7 @@ Project 1 of the AI Engineer sprint: Python, SQL, K-Means and a first LLM app fo
 - [x] **Day 1** — Set up and make the first LLM call (ad headlines as validated JSON)
 - [x] **Day 2** — SQL on real campaign data (14 queries, 21 tests, [full report](reports/sql_results.md))
 - [x] **Day 3** — Split customers into groups (K-Means, K = 4, [notebook](notebooks/day3_customer_segmentation.ipynb))
-- [ ] Day 4 — Write an email for each group
+- [x] **Day 4** — Write an email for each group (Gemini + Pydantic, retries, timeouts, token/cost log, [emails](data/processed/segment_emails.json))
 - [ ] Day 5 — Finish Project 1 (FastAPI + Docker)
 
 ## Setup
@@ -145,6 +145,56 @@ jupyter notebook notebooks/day3_customer_segmentation.ipynb
 # or run it headless:
 jupyter nbconvert --to notebook --execute --inplace notebooks/day3_customer_segmentation.ipynb
 ```
+
+## Day 4: an email for each group (Gemini)
+
+Gemini writes a description of the typical customer and one **email draft** per K-Means cluster, based on
+each cluster's real statistics. Nothing is sent: the output is a JSON file of drafts.
+
+```bash
+python scripts/generate_segment_emails.py --dry-run     # show exactly what Gemini receives (free)
+python scripts/generate_segment_emails.py               # generate all 4 emails
+python scripts/generate_segment_emails.py --clusters 2 --timeout 60 --max-attempts 3
+python -m pytest -v                                      # 64 tests, Gemini is mocked (no API calls)
+```
+
+**How it works**
+
+1. `src/data/segment_profiles.py` aggregates Day 3's `customer_segments.csv` plus the order categories into one
+   statistics block per cluster: size, spend, order value, frequency, recency, discount use, rating and category
+   mix with *lift* against all customers. It is validated with Pydantic and saved to
+   `data/processed/cluster_profiles.json`. No customer IDs or demographics leave this step.
+2. `src/llm/generator.py` sends **one cluster profile + the all-customer baseline** per call, using the Day 1 setup
+   (`GEMINI_API_KEY`/`GEMINI_MODEL` from `.env`, JSON mode, Pydantic `response_schema`).
+3. The reply is parsed and re-validated (`SegmentEmailResponse`, 12 required fields). It is also rejected if the email
+   invents an offer (percentages, money amounts, coupons, free shipping, "exclusive deal", loyalty points), mentions
+   "segments", or uses unknown placeholders. The only merge tags allowed are `{{first_name}}` and `{{store_name}}`.
+4. `src/llm/retry.py` retries timeouts, 429, 5xx and invalid replies with exponential backoff
+   (2 s → 4 s → 8 s, ±25% jitter, capped at 30 s, max 4 attempts, honouring Gemini's `retryDelay` on 429).
+   401/403/404/400 fail immediately. Each request has a 90 s timeout, and SDK retries are off so nothing is retried twice.
+5. `src/llm/usage_tracker.py` appends tokens from Gemini's `usage_metadata` and the **estimated** cost to
+   `reports/llm_usage.csv`. Prices live in [`config/llm_pricing.json`](config/llm_pricing.json) with effective dates
+   (gemini-3.8-flash: $0.75 in / $3.75 out per 1M tokens until 2026-12-31, then $1.50 / $7.50). Thinking tokens
+   are billed as output. If usage or the price is missing, the cells stay empty and nothing is guessed.
+
+**Result (gemini-3.8-flash, 2026-11-13): 4/4 segments, 0 retries, ≈ $0.040 estimated**
+
+| Cluster | Customers | Segment (named by Gemini) | Subject line | CTA |
+|---:|---:|---|---|---|
+| 0 | 1,255 | Lapsing Everyday Essentials Buyers | A quiet moment for your favourite reads and essentials | Explore Books and Beauty |
+| 1 | 1,433 | High-Value Electronics and Home Shoppers | Upgrade your living space and technology | Explore Electronics and Home |
+| 2 | 1,024 | Value-Conscious Broad Shoppers | Smart choices and lasting value for you | Explore the Store |
+| 3 | 1,288 | Frequent High-Value Repeat Shoppers | A warm thank you for continuing to shop with us | Explore Our Full Store |
+
+| File | What it is |
+|---|---|
+| `scripts/generate_segment_emails.py` | CLI: load → validate → prompt → Gemini → retry → validate → log → save → summary |
+| `src/llm/schemas.py` | Pydantic models for profiles (input), the Gemini reply, and the saved campaign |
+| `src/llm/generator.py` | Prompt, Gemini call, response validation, offer guardrails, atomic JSON save |
+| `src/llm/retry.py` · `src/llm/usage_tracker.py` | Retry/backoff/timeout handling · token and cost logging |
+| `src/data/segment_profiles.py` | Day 3 output → aggregated cluster profiles |
+| `data/processed/segment_emails.json` | The email drafts (validated) |
+| `tests/test_segment_emails.py` | Mocked Gemini tests: schema, bad JSON, missing fields, retries, timeouts, usage, Day 1 |
 
 ## Marketing terms
 

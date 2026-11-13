@@ -1,0 +1,102 @@
+{
+  "campaign": "Customer Segment Email Campaign",
+  "status": "draft - not sent",
+  "model": "gemini-3.8-flash",
+  "generated_at_utc": "2026-11-13T18:41:07+00:00",
+  "merge_tags": {
+    "{{first_name}}": "Recipient's first name, filled in by the email tool at send time"
+  },
+  "segments": [
+    {
+      "cluster_id": 0,
+      "segment_name": "Lapsing Everyday Essentials Buyers",
+      "customers": 1255,
+      "pct_of_all_customers": 25.1,
+      "typical_customer_description": "A customer in this group makes infrequent, smaller purchases centered around personal leisure and everyday pantry items. They typically buy lower-priced items across lifestyle categories rather than major durables or high-ticket electronics. Their shopping cadence has slowed noticeably compared to the overall customer base.",
+      "purchasing_behavior": "Customers average 2.16 orders with a mean order value of $427.13 and 2.12 items per order. They are lapsing, with an average recency of 165.9 days and only 32.4% having purchased in the last 90 days.",
+      "product_interests": [
+        "Books",
+        "Beauty",
+        "Food"
+      ],
+      "marketing_strategy": "Re-engage at-risk customers by highlighting low-friction lifestyle categories they have shown preference for, encouraging gentle reactivation through browsing books, beauty, and food without aggressive discount pushes.",
+      "email": {
+        "subject": "A quiet moment for your favourite reads and essentials",
+        "greeting": "Hello {{first_name}},",
+        "body": "It has been a little while since your last visit, and we would love to welcome you back. Whether you are looking to unwind with a good read, replenish your daily self-care essentials, or find tasty pantry staples, our shelves are ready whenever you are. Take a moment for yourself and discover what is waiting across our books, beauty, and food selections. From quiet afternoon reading to everyday personal routines, you will find plenty of simple favourites to enjoy. Whenever you are ready to explore, we are here to help make your everyday moments a little brighter. The {{store_name}} team",
+        "call_to_action": "Explore Books and Beauty"
+      },
+      "marketing_angle": "Gentle lifestyle re-engagement focusing on everyday comfort, personal care, and reading.",
+      "personalization_reason": "This segment has an extended average recency of 165.9 days and lower basket sizes ($427.13 average order value vs $1,262.89 baseline), with distinct category lifts in Books (1.32), Beauty (1.21), and Food (1.21). The email re-engages them around these specific lifestyle categories."
+    },
+    {
+      "cluster_id": 1,
+      "segment_name": "High-Value Electronics and Home Shoppers",
+      "customers": 1433,
+      "pct_of_all_customers": 28.7,
+      "typical_customer_description": "These customers place substantial, higher-value orders with larger basket sizes than the average shopper. They purchase less frequently and show minimal reliance on discounts or promotional markdowns. With above-average time since their last purchase, they tend to return when preparing for major home or technology upgrades.",
+      "purchasing_behavior": "They buy less frequently (average 2.36 orders) but spend significantly more per transaction ($2,063.40 AOV vs. $1,262.89 baseline) with an average recency of 154.9 days.",
+      "product_interests": [
+        "Electronics",
+        "Home & Garden"
+      ],
+      "marketing_strategy": "Re-engage these high-ticket shoppers by highlighting foundational product ranges in Electronics and Home & Garden. Focus on quality, functionality, and browsing convenience rather than promotions.",
+      "email": {
+        "subject": "Upgrade your living space and technology",
+        "greeting": "Hello {{first_name}},",
+        "body": "Whether you are planning your next home enhancement or looking for dependable equipment to support your everyday routine, quality tools make all the difference. When you invest in your surroundings and daily setup, having reliable items ensures everything runs smoothly. Take a look across our Electronics and Home & Garden departments to find pieces built to enhance your living space. From functional devices to practical additions for every room, our complete catalogue is ready for your next project. We invite you to explore the full range at your leisure whenever you are ready to update your space. Warm regards, The {{store_name}} team",
+        "call_to_action": "Explore Electronics and Home"
+      },
+      "marketing_angle": "Focus on high-utility investments for the home and tech setup to reactivate high-AOV customers.",
+      "personalization_reason": "This segment has an average order value of $2,063.40 (63% above baseline) and strong category affinities for Electronics (1.35 lift) and Home & Garden (1.17 lift), alongside higher recency (154.9 days vs 125.7 days baseline)."
+    },
+    {
+      "cluster_id": 2,
+      "segment_name": "Value-Conscious Broad Shoppers",
+      "customers": 1024,
+      "pct_of_all_customers": 20.5,
+      "typical_customer_description": "A typical customer in this segment prioritizes value and smart purchasing across the entire store rather than sticking to one specialty. Every customer in this group has utilized discounts, maintaining a significantly higher discount rate than the overall customer base. Their purchasing spans a broad, balanced mix of categories with no single department dominating their basket.",
+      "purchasing_behavior": "Customers average 2.70 orders with an average total spend of $3,034.16 and an average order value of $1,121.57, all slightly below the store average. They purchase an average of 3.12 items per order and show typical recency at 129.1 days, distinguished by a 100% discount usage rate and an average discount rate of 13.76%.",
+      "product_interests": [
+        "Food",
+        "Beauty",
+        "Books"
+      ],
+      "marketing_strategy": "Because this segment is motivated by maximizing value across a wide product catalog, marketing should emphasize smart selection, utility, and reliable everyday essentials. Since no category lift exceeds the 1.15 threshold, avoid narrowing the messaging to a single department, and instead invite them to explore the full catalog with a focus on practical value.",
+      "email": {
+        "subject": "Smart choices and lasting value for you",
+        "greeting": "Hello {{first_name}},",
+        "body": "Whether you are planning your next project or looking for everyday essentials, finding quality items that fit your lifestyle is always a smart choice. We know you appreciate making thoughtful, practical decisions whenever you shop with us.\n\nOur store features a wide selection across our diverse categories, from everyday staples and self-care goods to leisure reading and entertainment. Whatever you have on your list, you can discover dependable items designed to bring lasting value to your daily routine.\n\nTake a look around our complete collection today to see what fits your current needs.\n\nThe {{store_name}} team",
+        "call_to_action": "Explore the Store"
+      },
+      "marketing_angle": "Highlighting smart decision-making and practical value across a broad range of everyday store categories.",
+      "personalization_reason": "All 1,024 customers in this segment (100%) have used discounts, with an average discount rate of 13.76% compared to the baseline 5.16%, demonstrating strong value sensitivity. Additionally, all category lifts remain between 0.91 and 1.12 (none exceed 1.15), indicating a diversified catalog mix that benefits from wide-ranging value messaging rather than category-specific promotion."
+    },
+    {
+      "cluster_id": 3,
+      "segment_name": "Frequent High-Value Repeat Shoppers",
+      "customers": 1288,
+      "pct_of_all_customers": 25.8,
+      "typical_customer_description": "A typical customer in this segment is an active, reliable repeat buyer who shops across the entire store rather than focusing on a single product niche. They have placed an average of over six orders with an average lifetime spend of over $8,300, and more than four in five have ordered within the past 90 days.",
+      "purchasing_behavior": "They buy frequently with an average of 6.36 orders and 0.0% single-order buyers. They are highly active with an average recency of 51.4 days (82.3% ordering within 90 days) and spend heavily, averaging $8,300.02 in total spend with an average order value of $1,298.94.",
+      "product_interests": [
+        "Sports",
+        "Beauty",
+        "Electronics",
+        "Home & Garden",
+        "Books",
+        "Food"
+      ],
+      "marketing_strategy": "Acknowledge and reinforce their ongoing relationship with the brand without relying on heavy discounts or narrow product recommendations. Encourage continued broad-catalog discovery and frictionless repeat visits across multiple departments.",
+      "email": {
+        "subject": "A warm thank you for continuing to shop with us",
+        "greeting": "Hello {{first_name}},",
+        "body": "We wanted to take a moment to thank you for regularly choosing to shop with us. Having you visit our store time and again means a great deal to everyone on our team. Whether you are looking for everyday essentials or something special across our different departments, we are always working to ensure your experience is smooth and rewarding. From electronics and home goods to sports gear and beauty, there is always plenty waiting to be discovered whenever you are ready. Whenever you feel like taking a look around, feel free to stop by and explore everything we have in store. We appreciate your ongoing support and look forward to welcoming you back soon. The {{store_name}} team",
+        "call_to_action": "Explore Our Full Store"
+      },
+      "marketing_angle": "Customer appreciation and broad catalog exploration celebrating their frequent, ongoing relationship with the store.",
+      "personalization_reason": "Cluster 3 customers are dedicated repeat shoppers with 6.36 average orders, zero single-order buyers, an average spend of $8,300.02 (nearly double the baseline of $4,355.81), and high recency (51.4 days vs 125.7 baseline). Because their category lift across all eight departments sits evenly between 0.95 and 1.03, the messaging highlights genuine appreciation and broad browsing rather than pigeonholing them into a single category."
+    }
+  ],
+  "failed_segments": []
+}
