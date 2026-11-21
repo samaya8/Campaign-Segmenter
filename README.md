@@ -355,7 +355,7 @@ Example (cluster 0), as saved:
 
 ### Token usage and estimated cost
 
-From `reports/llm_usage.csv` (written on each run; kept local, not committed). Costs are **estimates** at $0.75 per 1M input and $3.75 per 1M output tokens
+Day 4 rows are in [`reports/llm_usage.csv`](reports/llm_usage.csv), one row per Gemini call. The Day 5 API call was logged inside its container and is copied here from the API response. Costs are **estimates** at $0.75 per 1M input and $3.75 per 1M output tokens
 (`config/llm_pricing.json`). Thinking tokens are billed as output.
 
 | Run | Calls | Input tokens | Output tokens (of which thinking) | Est. cost |
@@ -381,7 +381,26 @@ thinking length varies. Expect roughly **$0.005–0.03 per email**.
 - **Video** takes 18.3% of spend for 9.7% of revenue. All 24 video campaigns are below the 4.77 average.
 - Big spend ≠ big revenue: only 2 of the 10 biggest spenders are top 10 in revenue.
 
-Full report with every query and its output: [`reports/sql_results.md`](reports/sql_results.md).
+All 14 queries are in [`sql/queries.sql`](sql/queries.sql). Each one's key result:
+
+| # | Question | SQL used | Result |
+|---|---|---|---|
+| Q01 | Total ad spend | `SUM`, `COUNT(DISTINCT)` | 120 campaigns, $4.52M spend, 437M impressions, 7.1M clicks (CTR 1.63%, CPC $0.64) |
+| Q02 | Clicks by channel | `INNER JOIN`, `GROUP BY`, subquery | Affiliate 33.6% of clicks; video 6.9% of clicks on 18% of spend |
+| Q03 | Conversions and revenue | `SUM(CASE WHEN)`, `NULLIF` | 39,696 conversions (16,691 purchases), $21.56M revenue, ROAS 4.77 |
+| Q04 | Funnel metrics + ROAS per channel | CTEs, `INNER`/`LEFT JOIN`, `COALESCE` | Channel table above: affiliate 6.54 → video 2.52 |
+| Q05 | Spend and clicks per campaign | `JOIN`, multi-column `GROUP BY` | Spend $6.1k–$72.2k; all within budget (69.9–98.7% used) |
+| Q06 | Top 10 campaigns by revenue | CTEs, `LEFT JOIN`, `LIMIT` | 9 of 10 are affiliate or paid search; CMP0050 and CMP0110 return ≈ $11 per $1 |
+| Q07 | High-spend campaigns with no conversions | `LEFT JOIN … IS NULL` anti-join | 0 rows: every campaign converts (logic tested on a fake DB) |
+| Q08 | Average campaign by channel | CTE, `AVG`, `MIN`/`MAX`, `HAVING` | Best video campaign (ROAS 3.49) is below every other channel's average |
+| Q09 | Monthly spend and revenue | two CTEs, `strftime` | ROAS by year: 2023 4.85 · 2024 4.40 · 2025 5.31 |
+| Q10 | **Rank campaigns by CTR** | `RANK() OVER (PARTITION BY channel …)` | Top 10 CTR all paid search (3.52–3.57%) |
+| Q11 | Best/worst CTR per channel | window function in a CTE | CTR barely varies within a channel (paid search 3.38–3.57%) |
+| Q12 | Do big spenders earn the most? | two `DENSE_RANK()` windows | Only 2 of the top 10 spenders are top 10 in revenue; #1 spender ranks 27th |
+| Q13 | 10 lowest-ROAS campaigns | CTEs, `CROSS JOIN`, `RANK()` | 9 of 10 are video; lowest ROAS 1.82 (no campaign loses money) |
+| Q14 | Below-average campaigns per channel | `CASE` in `SUM`, `HAVING` | All 24 video and 22 of 24 display campaigns are below average (≈ $1.76M, 39% of budget) |
+
+Full report with every query's output and what it means: [`reports/sql_results.md`](reports/sql_results.md).
 
 ### Tests
 

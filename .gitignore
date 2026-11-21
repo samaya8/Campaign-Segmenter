@@ -4,6 +4,8 @@ __pycache__/
 *.pyc
 # Raw data stays local (see README for download steps)
 *.csv
+# ...except the LLM token/cost log (aggregate numbers only, no secrets or customer data)
+!reports/llm_usage.csv
 data/raw/
 *.sqlite
 *.db

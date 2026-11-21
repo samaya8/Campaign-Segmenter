@@ -1,0 +1,9 @@
+run_id,timestamp_utc,cluster_id,model,status,attempts,retries,input_tokens,output_tokens,thinking_tokens_in_output,total_tokens,input_price_per_1m_usd,output_price_per_1m_usd,est_input_cost_usd,est_output_cost_usd,est_total_cost_usd,note,error
+20261113T183821Z,2026-11-13T18:38:31+00:00,0,gemini-3.8-flash,success,1,0,1528,1053,536,2581,0.75,3.75,0.001146,0.003949,0.005095,ESTIMATED cost from config/llm_pricing.json,
+20261113T183821Z,2026-11-13T18:38:48+00:00,1,gemini-3.8-flash,success,1,0,1531,2023,1444,3554,0.75,3.75,0.001148,0.007586,0.008734,ESTIMATED cost from config/llm_pricing.json,
+20261113T183821Z,2026-11-13T18:38:59+00:00,2,gemini-3.8-flash,success,1,0,1534,1121,627,2655,0.75,3.75,0.001151,0.004204,0.005354,ESTIMATED cost from config/llm_pricing.json,
+20261113T183821Z,2026-11-13T18:39:13+00:00,3,gemini-3.8-flash,success,1,0,1529,1872,1367,3401,0.75,3.75,0.001147,0.007020,0.008167,ESTIMATED cost from config/llm_pricing.json,
+20261113T183949Z,2026-11-13T18:40:07+00:00,0,gemini-3.8-flash,success,1,0,1667,2041,1513,3708,0.75,3.75,0.001250,0.007654,0.008904,ESTIMATED cost from config/llm_pricing.json,
+20261113T183949Z,2026-11-13T18:40:21+00:00,1,gemini-3.8-flash,success,1,0,1670,1450,948,3120,0.75,3.75,0.001253,0.005437,0.006690,ESTIMATED cost from config/llm_pricing.json,
+20261113T183949Z,2026-11-13T18:40:44+00:00,2,gemini-3.8-flash,success,1,0,1673,2896,2285,4569,0.75,3.75,0.001255,0.010860,0.012115,ESTIMATED cost from config/llm_pricing.json,
+20261113T183949Z,2026-11-13T18:41:07+00:00,3,gemini-3.8-flash,success,1,0,1668,2814,2193,4482,0.75,3.75,0.001251,0.010553,0.011804,ESTIMATED cost from config/llm_pricing.json,
