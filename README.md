@@ -400,6 +400,9 @@ skipped automatically when the SQLite database hasn't been downloaded (for examp
 - **LLM analysis fields are not fact-checked.** The guardrails check the *customer-facing* email (no invented
   offers, prices or percentages) and the JSON schema. The analysis text can still be imprecise. In the Day 5
   run above, Gemini described a recency of 154.9 days (baseline 125.7, so *less* recent) as "lower than average".
+  In the fresh-clone run for cluster 2, it listed `product_interests` Food/Beauty/Books even though every lift
+  is ≤ 1.12, which breaks the prompt's own "broad mix" rule. `GET /segments` computes preferences in code, so
+  there it correctly reports `top_category: null`.
 - **Slow, synchronous generation.** One `/generate` call takes 15–70 s (mostly model thinking time) and holds a
   worker thread. There is no caching, so every call costs tokens.
 - **No authentication or rate limiting.** Anyone who can reach port 8000 can spend your Gemini quota. Keep the
