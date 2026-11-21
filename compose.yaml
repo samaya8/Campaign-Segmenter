@@ -1,0 +1,15 @@
+# One command to build and start the API:   docker compose up --build
+# Then open http://localhost:8000/docs
+services:
+  api:
+    build: .
+    image: campaign-segmenter:latest
+    ports:
+      - "8000:8000"
+    # GEMINI_API_KEY (and optional GEMINI_MODEL, GEMINI_TIMEOUT_S, GEMINI_MAX_ATTEMPTS) are read from .env
+    # at RUNTIME and passed to the container as environment variables. They are never part of the image.
+    # Without .env the API still starts: /segments works and /generate answers 503 until a key is set.
+    env_file:
+      - path: .env
+        required: false
+    restart: unless-stopped

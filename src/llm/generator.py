@@ -25,7 +25,7 @@ from google import genai
 from google.genai import types
 from pydantic import ValidationError
 
-from src.llm.retry import InvalidResponseError, RetryError, RetryPolicy, call_with_retry
+from src.llm.retry import InvalidResponseError, RetryError, RetryPolicy, call_with_retry, classify
 from src.llm.schemas import (
     ClusterProfile, FailedSegment, ProfileSet, SegmentEmailCampaign, SegmentEmailRecord, SegmentEmailResponse,
     SegmentStats,
@@ -173,6 +173,7 @@ class SegmentResult:
     attempts: int
     usage: TokenUsage = field(default_factory=TokenUsage)
     error: str = ""
+    error_kind: str = ""   # e.g. "timeout", "rate_limited", "invalid_response", "http_403" (see retry.classify)
 
     @property
     def ok(self) -> bool:
@@ -210,7 +211,8 @@ def generate_segment_email(
     try:
         response, attempts = call_with_retry(attempt, policy, label=f"cluster {profile.cluster_id}", **kwargs)
     except RetryError as err:
-        return SegmentResult(profile.cluster_id, None, err.attempts, usage, error=str(err))
+        return SegmentResult(profile.cluster_id, None, err.attempts, usage, error=str(err),
+                             error_kind=classify(err.last_error)[0])
     return SegmentResult(profile.cluster_id, SegmentEmailRecord.from_response(response, profile), attempts, usage)
 
 

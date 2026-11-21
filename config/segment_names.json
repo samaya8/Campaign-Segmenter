@@ -1,0 +1,29 @@
+{
+  "_source": "Human-readable names given in the Day 3 notebook (sections 12-13) after reading each cluster's centroid. They belong to the committed K = 4 model (StandardScaler + KMeans, random_state=42, n_init=10). `customers` is a consistency check: if the notebook is re-run and a cluster's size changes, the API ignores that name and falls back to 'Cluster <id>'.",
+  "clusters": [
+    {
+      "cluster_id": 0,
+      "customers": 1255,
+      "name": "Low-Value Occasional Buyers",
+      "description": "Rare, small, cheap orders; lean towards Books, Beauty and Food; long time since the last order."
+    },
+    {
+      "cluster_id": 1,
+      "customers": 1433,
+      "name": "Big-Basket Buyers",
+      "description": "Infrequent but the largest orders; lean towards Electronics and Home & Garden; almost no discounts."
+    },
+    {
+      "cluster_id": 2,
+      "customers": 1024,
+      "name": "Discount-Driven Shoppers",
+      "description": "Mid-sized orders at by far the highest discount rate; broad category mix."
+    },
+    {
+      "cluster_id": 3,
+      "customers": 1288,
+      "name": "Loyal Frequent Buyers",
+      "description": "About 2.5x more orders than other groups, the most recent purchases and the highest total spend."
+    }
+  ]
+}

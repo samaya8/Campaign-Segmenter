@@ -1,0 +1,26 @@
+# Secrets: NEVER send to the Docker build context
+.env
+.env.*
+!.env.example
+
+# Local environments, caches and tooling
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+pytest-cache-files-*/
+.git/
+.gitignore
+.claude/
+.vscode/
+.idea/
+
+# Raw data and large/local files (the API only needs data/processed/*.json)
+*.csv
+*.sqlite
+*.db
+data/raw/
+notebooks/
+reports/
+tests/

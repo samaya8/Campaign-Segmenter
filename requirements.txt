@@ -1,11 +1,6 @@
+# Runtime: everything the API needs (this is what the Docker image installs).
 google-genai>=1.0
 pydantic>=2.7
 python-dotenv>=1.0
-pandas>=2.0
-tabulate>=0.9   # pandas .to_markdown() for reports
-pytest>=8.0
-numpy>=1.26
-scikit-learn>=1.4
-matplotlib>=3.8
-seaborn>=0.13
-jupyter
+fastapi>=0.115
+uvicorn>=0.30

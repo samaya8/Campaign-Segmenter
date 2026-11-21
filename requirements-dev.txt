@@ -1,0 +1,12 @@
+# Full development setup: the API plus SQL analysis (Day 2), K-Means notebook (Day 3),
+# the email pipeline (Day 4) and the test suite.
+-r requirements.txt
+pandas>=2.0
+numpy>=1.26
+scikit-learn>=1.4
+tabulate>=0.9   # pandas .to_markdown() for reports
+matplotlib>=3.8
+seaborn>=0.13
+jupyter
+pytest>=8.0
+httpx>=0.27     # FastAPI TestClient
